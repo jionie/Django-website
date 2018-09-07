@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <script src="/static/node_modules/angular/angular.js"></script>
+    <script src="/static/node_modules/angular-resource/angular-resource.js"></script>
+    <script src="/static/js/filesModelDirective.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/node_modules/bootstrap/dist/css/bootstrap.css">
+    
+</head>
+
+<body>  
+    <div class="container">
+            
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+		<h4>Analysis Results<h4>
+            </div>
+        
+            
+           
+		
+		<h4>Here are the uploaded images.<h4>
+		
+	    	<div class="panel-body">
+           	<pre class="pre-scrollable" font-size="0"> 
+            		
+　　　　　　　　　　　　　　　　　　　　　   <div class="row" >
+                        
+                                      
+		        {% for img in queryset %}  
+		            
+		            
+                                             
+　　　　　　　　　　　　　　　　　　　　　　　　　　  <div class="col-sm-3 col-xs-3 col-md-3 col-lg-3" style="display:inline;">
+                            
+			    <img  src="{{img.img.url}}" class="img-responsive inline-block" height="200" width="250" />    　　　　       
+                           
+                            </div>
+　　　　　　　　　　　　　　　　　　　　　　　　　　 
+                           
+                           
+		            
+		           
+			{% endfor %} 
+                        
+                        
+                        
+                        </div>
+            		
+                        
+            	</pre>
+            	</div>
+           　　　　　
+            
+
+            
+                
+                <h4>Here are the query images and probabilities.<h4>
+               
+           
+            
+	        <div class="panel-body">
+	            <pre class="pre-scrollable">
+                        
+  		        {% for result in Result_images %}
+			        <div class="text-left">
+　　　				    <h5>Possible Type: {{result.Result_name}}, Probability: {{result.Result_probability}}, Measures: ({{list}}).<h5>
+　			        </div> 
+
+                                <div class="row">
+                                
+                                
+		                {% for imgs in result.Result_path %} 
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　       
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			                <img  src={% static imgs %} class="img-responsive inline-block" height="200" width="250" />        
+     
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　            </div>  
+                                   
+                                    
+
+			        {% endfor %} 
+                                
+                                 
+                               
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 </div> 
+                        {% endfor %} 
+                              
+                    	
+                    </pre>
+                </div>
+               <span style="margin-left:1045px;">
+           
+            
+           
+	      <div class="panel-body">    
+		<span style="margin-left:1045px;">
+		     <div>
+		       <button class="btn btn-primary" type="submit" onclick="location.href='/result'"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Back to choose measures</button> 
+	       
+		    </div> 
+              </div> 
+
+              <div class="panel-body">    
+		<span style="margin-left:1045px;">
+		     <div>
+		       <button class="btn btn-primary" type="submit" onclick="location.href='/image'"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Back to upload</button> 
+	       
+		    </div>   
+              </div>
+
+              <div class="panel-body"> 
+		<span style="margin-left:1045px;">
+		    <div>
+		       <button class="btn btn-primary" type="submit" onclick="location.href='/image/logout'"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Logout</button> 
+		    </div>
+              </div>
+          
+        </div>
+	   
+    
+        
+    </div>
+
+
+
+</body>  

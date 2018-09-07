@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <script src="/static/node_modules/angular/angular.js"></script>
+    <script src="/static/node_modules/angular-resource/angular-resource.js"></script>
+    <script src="/static/js/filesModelDirective.js"></script>
+    <script src="/static/js/app.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/node_modules/bootstrap/dist/css/bootstrap.css">
+    
+</head>
+
+<body>  
+    <div class="container">
+                <div class="panel panel-primary">
+                
+                <div class="panel-heading">
+                    <h4>Choose measures</h4>
+                </div>
+           
+		<form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}          
+			<span style="margin-left:1045px;">	
+		        <div class="[ form-group ]">
+		        <input type="checkbox" name="check_box_list" id="fancy-checkbox-primary1" autocomplete="off" value="TPI"/>
+			<div class="[ btn-group ]">
+		            <label for="fancy-checkbox-primary1" class="[ btn btn-primary ]">
+		            <span class="[ glyphicon glyphicon-ok ]"></span>
+			    <span> </span>
+			    </label>
+			    <label for="fancy-checkbox-primary1" class="[ btn btn-default active ]">
+				    TPI
+			    </label>
+			</div>
+                        </div>
+
+                       
+		        <div class="[ form-group ]">
+		        <input type="checkbox" name="check_box_list" id="fancy-checkbox-primary2" autocomplete="off" value="Striation Pattern"/>
+			<div class="[ btn-group ]">
+		            <label for="fancy-checkbox-primary2" class="[ btn btn-primary ]">
+		            <span class="[ glyphicon glyphicon-ok ]"></span>
+			    <span> </span>
+			    </label>
+			    <label for="fancy-checkbox-primary2" class="[ btn btn-default active ]">
+				    Striation Pattern
+			    </label>
+			</div>
+                        </div>
+
+		        <div class="[ form-group ]">
+		        <input type="checkbox" name="check_box_list" id="fancy-checkbox-primary3" autocomplete="off" value="Deepth"/>
+			<div class="[ btn-group ]">
+		            <label for="fancy-checkbox-primary3" class="[ btn btn-primary ]">
+		            <span class="[ glyphicon glyphicon-ok ]"></span>
+			    <span> </span>
+			    </label>
+			    <label for="fancy-checkbox-primary3" class="[ btn btn-default active ]">
+				    Deepth
+			    </label>
+			</div>
+                        </div>
+                        
+                        <span style="margin-left:1045px;">
+                        <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-send" aria-hidden="true"></span> Analyze</button>              
+		 </form>
+            </div>
+
+           
+
+            <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4>Here are the upload images.<h4>
+            </div>
+            <div class="panel-body">
+	    <div class="row">       
+                {% for img in queryset %}  
+		<div class="col-sm-3 col-xs-3 col-md-3 col-lg-3" style="display:inline;">
+                    <li>
+	            <img  src="{{img.img.url}}" class="img-responsive" height="200" width="250" />
+                    <a href="{% url 'Show:delete_image' img.img_id %}">Delete</a>     
+                    </li> 
+		</div>
+		{% endfor %}  
+            </div>	
+            </div>
+
+            <div class="panel-body">   
+            <span style="margin-left:1045px;">
+            <div>
+               <button class="btn btn-primary" type="submit" onclick="location.href='/image'"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> Upload </button> 
+       
+            </div> 
+	    </div>
+             
+            <div class="panel-body">
+            <div ng-if="images.length == 0">
+                    If you want to clean the existing images, please click Clean images.
+            </div>
+
+            <span style="margin-left:1045px;">
+
+            <div>
+               <button class="btn btn-primary" type="submit" onclick="location.href='/result/refresh'"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Clean images</button> 
+            </div>
+
+            <span style="margin-left:1045px;">
+            <div>
+               <button class="btn btn-primary" type="submit" onclick="location.href='/image/logout'"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> Logout</button> 
+            </div>
+            </div>
+            </div>
+            </div>
+
+     {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+    </div>
+
+</body>  
